@@ -34,7 +34,7 @@ func (b *billService) FetchBills(ctx context.Context, date BDate) (*[]Bill, erro
 	case date.Day == 0:
 		return b.billRepository.GetBillByMonth(ctx, date.Year, date.Month)
 	default:
-		return b.billRepository.GetBillByDate(ctx, date.Year, date.Month, date.Day)
+		return b.billRepository.GetBillByDay(ctx, date.Year, date.Month, date.Day)
 	}
 }
 

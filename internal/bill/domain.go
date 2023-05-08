@@ -21,7 +21,7 @@ type BDate struct {
 
 type BillRepository interface {
 	GetBills(ctx context.Context) (*[]Bill, error)
-	GetBillByDate(ctx context.Context, year int, month int, day int) (*[]Bill, error)
+	GetBillByDay(ctx context.Context, year int, month int, day int) (*[]Bill, error)
 	GetBillByMonth(ctx context.Context, year int, month int) (*[]Bill, error)
 	GetBillByYear(ctx context.Context, year int) (*[]Bill, error)
 	GetBillByID(ctx context.Context, id int) (*Bill, error)
