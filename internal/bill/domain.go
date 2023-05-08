@@ -34,6 +34,6 @@ type BillService interface {
 	FetchBills(ctx context.Context, date BDate) (*[]Bill, error)
 	FetchBillByID(ctx context.Context, id int) (*Bill, error)
 	BuildBill(ctx context.Context, bill *Bill) error
-	ModifyBill(ctx context.Context, id int) error
+	ModifyBill(ctx context.Context, bill *Bill) error
 	DestroyBill(ctx context.Context, id int) error
 }
