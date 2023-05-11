@@ -31,9 +31,9 @@ type BillRepository interface {
 }
 
 type BillService interface {
-	FetchBills(ctx context.Context, date BDate) (*[]Bill, error)
-	FetchBillByID(ctx context.Context, id int) (*Bill, error)
-	BuildBill(ctx context.Context, bill *Bill) error
-	ModifyBill(ctx context.Context, bill *Bill) error
-	DestroyBill(ctx context.Context, id int) error
+	GetBills(ctx context.Context, date BDate) (*[]Bill, error)
+	GetBillByID(ctx context.Context, id int) (*Bill, error)
+	CreateBill(ctx context.Context, bill *Bill) error
+	UpdateBill(ctx context.Context, bill *Bill) error
+	DeleteBill(ctx context.Context, id int) error
 }

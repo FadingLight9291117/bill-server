@@ -1,10 +1,8 @@
 package infrastructure
 
 import (
-	"bill-go-fiber/internal/auth"
-	"bill-go-fiber/internal/city"
+	"bill-go-fiber/internal/bill"
 	"bill-go-fiber/internal/misc"
-	"bill-go-fiber/internal/user"
 	"fmt"
 	"log"
 
@@ -53,18 +51,21 @@ func Run() {
 	app.Use(requestid.New())
 
 	// Create repositories.
-	cityRepository := city.NewCityRepository(mariadb)
-	userRepository := user.NewUserRepository(mariadb)
+	//cityRepository := city.NewCityRepository(mariadb)
+	//userRepository := user.NewUserRepository(mariadb)
+	billRepository := bill.NewMariaDBRepository(mariadb)
 
 	// Create all of our services.
-	cityService := city.NewCityService(cityRepository)
-	userService := user.NewUserService(userRepository)
+	//cityService := city.NewCityService(cityRepository)
+	//userService := user.NewUserService(userRepository)
+	billService := bill.NewBillService(billRepository)
 
 	// Prepare our endpoints for the API.
 	misc.NewMiscHandler(app.Group("/api/v1"))
-	auth.NewAuthHandler(app.Group("/api/v1/auth"))
-	city.NewCityHandler(app.Group("/api/v1/cities"), cityService)
-	user.NewUserHandler(app.Group("/api/v1/users"), userService)
+	//auth.NewAuthHandler(app.Group("/api/v1/auth"))
+	//city.NewCityHandler(app.Group("/api/v1/cities"), cityService)
+	//user.NewUserHandler(app.Group("/api/v1/users"), userService)
+	bill.NewBillHandler(app.Group("/api/v1/bills"), billService)
 
 	// Prepare an endpoint for 'Not Found'.
 	app.All("*", func(c *fiber.Ctx) error {

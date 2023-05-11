@@ -17,7 +17,7 @@ type mariaDBRepository struct {
 	mariadb *sql.DB
 }
 
-func newMariaDBRepository(mariadb *sql.DB) BillRepository {
+func NewMariaDBRepository(mariadb *sql.DB) BillRepository {
 	return &mariaDBRepository{
 		mariadb: mariadb,
 	}
