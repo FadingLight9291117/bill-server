@@ -24,7 +24,7 @@ services:
     image: mariadb:10.6.3
     restart: always
     volumes:
-      - ./scripts/migrations.sql:/docker-entrypoint-initdb.d/1.sql
+      - ./scripts/billMigrations.sql:/docker-entrypoint-initdb.d/1.sql
     expose:
       - 3306
     environment:
