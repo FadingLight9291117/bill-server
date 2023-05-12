@@ -4,16 +4,14 @@ USE bill;
 
 create table Bills
 (
-    id      int auto_increment
-        primary key,
+    id      int auto_increment primary key,
     type    varchar(15)  not null,
     date    varchar(15)  not null,
     money   varchar(900) null,
     cls     varchar(900) null,
     label   varchar(900) null,
     options varchar(900) null
-)
-    charset = utf8mb4;
+);
 
 INSERT INTO bill.Bills (id, type, date, money, cls, label, options)
 VALUES (3341, 'INCOME', '2022-09-01', '8.5', '交通', '打的', '');
@@ -75,5 +73,3 @@ INSERT INTO bill.Bills (id, type, date, money, cls, label, options)
 VALUES (3369, 'INCOME', '2022-07-07', '1.6', '交通', '公交', '');
 INSERT INTO bill.Bills (id, type, date, money, cls, label, options)
 VALUES (3370, 'INCOME', '2022-07-07', '9.0', '餐饮', '晚餐', '');
-INSERT INTO bill.Bills (id, type, date, money, cls, label, options)
-VALUES (3371, 'INCOME', '2022-07-07', '5.5', '餐饮', '晚餐', '');

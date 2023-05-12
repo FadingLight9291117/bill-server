@@ -8,7 +8,7 @@ import (
 // This function is used to connect to MariaDB.
 func ConnectToMariaDB() (*sql.DB, error) {
 	// Connect to MariaDB.
-	db, err := sql.Open("mysql", "root:@tcp(mariadb:3306)/fiber_dmca")
+	db, err := sql.Open("mysql", "root:@tcp(mariadb:3306)/bill")
 	if err != nil {
 		return nil, err
 	}

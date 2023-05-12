@@ -4,6 +4,9 @@ FROM golang:1.20 AS api
 # Set working directory.
 WORKDIR /compiler
 
+# Env GOPROY
+ENV GOPROXY="https://proxy.golang.com.cn,direct"
+
 # Copy dependency locks so we can cache.
 COPY go.mod go.sum ./
 

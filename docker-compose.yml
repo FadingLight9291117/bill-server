@@ -27,6 +27,8 @@ services:
       - ./scripts/billMigrations.sql:/docker-entrypoint-initdb.d/1.sql
     expose:
       - 3306
+    ports:
+      - 3306:3306
     environment:
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=true
     networks:
