@@ -13,6 +13,7 @@ type Bill struct {
 	Options string  `json:"options"`
 }
 
+// BDate 用于判断获取bill的时间范围
 type BDate struct {
 	Year  int `json:"year"`
 	Month int `json:"month"`
