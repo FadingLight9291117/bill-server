@@ -191,3 +191,10 @@ Thanks to articles and their writers that I have read and found inspiration in!
 - [Go Microservices with Clean Architecture by Jin Feng](https://medium.com/@jfeng45/go-microservice-with-clean-architecture-application-design-68f48802c8f)
 - [Go Project Layout Repository](https://github.com/golang-standards/project-layout)
 - [Trying Clean Architecture on Go by Imam Tumorang](https://hackernoon.com/golang-clean-archithecture-efd6d7c43047)
+
+
+# Dockerfile多阶段构建
+
+Dockerfile多阶段构建的意义在于，能够将上一段构建的文件拷贝到后一个镜像中，而最终生成的镜像以最后一个`FROM`为准
+
+该项目中的Dockerfile中第一段镜像用于编译，而第二段镜像用于部署
