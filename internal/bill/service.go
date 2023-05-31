@@ -15,7 +15,7 @@ func NewBillService(r BillRepository) BillService {
 	}
 }
 
-// FetchBills
+// GetBills
 // - date is {year, month, day} when return a day bills
 // - date is {year, month} when return a month bills
 // - date is {year} when return a year bills
