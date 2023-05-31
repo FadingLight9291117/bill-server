@@ -17,7 +17,10 @@ RUN go mod download
 COPY . .
 
 # Build our application.
-RUN CGO_ENABLED=0 GOOS=linux go build -o docker-mariadb-clean-arch ./cmd/docker-mariadb-clean-arch/main.go
+#RUN CGO_ENABLED=0 GOOS=linux go build -o docker-mariadb-clean-arch ./cmd/docker-mariadb-clean-arch/main.go
+RUN go build  -a -ldflags "-linkmode external -extldflags '-static' -s -w" -o docker-mariadb-clean-arch ./cmd/docker-mariadb-clean-arch/main.go
+
+
 
 # Use 'scratch' image for super-mini build.
 FROM scratch AS prod

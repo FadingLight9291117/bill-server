@@ -22,6 +22,7 @@ import (
 func Run() {
 	// Try to connect to our database as the initial part.
 	mariadb, err := ConnectToMariaDB()
+	ConnectToSqlite()
 	if err != nil {
 		log.Fatal("Database connection error: $s", err)
 	}
