@@ -1,9 +1,13 @@
 package bill
 
-import "context"
+import (
+	"context"
+	"gorm.io/gorm"
+)
 
 // Bill represents 'bills' object.
 type Bill struct {
+	gorm.Model
 	ID      int     `json:"id"`
 	Type    string  `json:"type"`
 	Date    string  `json:"date"`

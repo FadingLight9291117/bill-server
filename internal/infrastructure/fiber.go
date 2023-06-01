@@ -21,8 +21,8 @@ import (
 // Run our Fiber webserver.
 func Run() {
 	// Try to connect to our database as the initial part.
-	mariadb, err := ConnectToMariaDB()
-	ConnectToSqlite()
+	//mariadb, err := ConnectToMariaDB()
+	sqlite, err := ConnectToSqlite()
 	if err != nil {
 		log.Fatal("Database connection error: $s", err)
 	}
@@ -54,7 +54,7 @@ func Run() {
 	// Create repositories.
 	//cityRepository := city.NewCityRepository(mariadb)
 	//userRepository := user.NewUserRepository(mariadb)
-	billRepository := bill.NewMariaDBRepository(mariadb)
+	billRepository := bill.NewDatabaseRepository(sqlite)
 
 	// Create all of our services.
 	//cityService := city.NewCityService(cityRepository)

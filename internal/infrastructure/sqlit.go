@@ -6,11 +6,11 @@ import (
 )
 
 func ConnectToSqlite() (*gorm.DB, error) {
-	dsn := "test.db"
+	dsn := "bill.db"
 	//dsn := "file::memory:?cache=shared"
 	db, err := gorm.Open(sqlite.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect database")
+		panic("failed to connect database.\n")
 	}
 
 	return db, nil
