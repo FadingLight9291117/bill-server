@@ -5,15 +5,24 @@ import (
 	"bill-go-fiber/internal/label"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"log"
 	"os"
 )
 
 func ConnectToSqlite() (*gorm.DB, error) {
-	dsn := "bill.db"
-	//dsn := "file::memory:?cache=shared"
+	var dsn string
+	switch os.Getenv("ENV") {
+	case "prod":
+		dsn = "bill.db"
+	default:
+		dsn = "file::memory:?cache=shared"
+	}
+
 	db, err := gorm.Open(sqlite.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database.\n")
+	} else {
+		log.Println("Connecting to sqlite.")
 	}
 
 	err = db.AutoMigrate(&label.Label{})
@@ -26,13 +35,20 @@ func ConnectToSqlite() (*gorm.DB, error) {
 	}
 
 	// migrate data
-	go func() {
-		sql, err := os.ReadFile("scripts/sqliteMigrations.sql")
-		if err != nil {
-			panic("failed to read migration sql file: " + err.Error())
-		}
-		db.Exec(string(sql))
-	}()
+	if os.Getenv("ENV") != "prod" {
+		go func() {
+			sql, err := os.ReadFile("scripts/sqliteMigrations.sql")
+			if err != nil {
+				//panic("failed to read migration sql file: " + err.Error())
+				log.Fatal("failed to read migration sql file: " + err.Error())
+			}
+			res := db.Exec(string(sql))
+			if res.Error != nil {
+				log.Fatal("failed to migrate" + res.Error.Error())
+			}
+			log.Println("SQL migrated successfully!")
+		}()
+	}
 
 	return db, nil
 }
