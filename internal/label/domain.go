@@ -7,11 +7,9 @@ import (
 
 type Label struct {
 	gorm.Model
-	ID         int    `json:"id"`
-	Type       string `json:"type"`
-	Name       string `json:"name"`
-	RelativeId int    `json:"relativeId"`
-	Count      int    `json:"count"`
+	Type  string
+	Name  string
+	Count int
 }
 
 type LabelRepository interface {

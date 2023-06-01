@@ -8,13 +8,12 @@ import (
 // Bill represents 'bills' object.
 type Bill struct {
 	gorm.Model
-	ID      int     `json:"id"`
-	Type    string  `json:"type"`
-	Date    string  `json:"date"`
-	Money   float64 `json:"money"`
-	Class   string  `json:"class"`
-	Label   string  `json:"label"`
-	Options string  `json:"options"`
+	Type    string
+	Date    string
+	Money   float64
+	Class   string
+	Label   string
+	Options string
 }
 
 // BDate 用于判断获取bill的时间范围
