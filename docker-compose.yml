@@ -16,8 +16,8 @@ services:
       - JWT_SECRET=fiber
     networks:
       - application
-    depends_on:
-      - mariadb
+#    depends_on:
+#      - mariadb
     command: ./docker-mariadb-clean-arch
 
 #  mariadb:
