@@ -2,6 +2,7 @@ package infrastructure
 
 import (
 	"bill-go-fiber/internal/bill"
+	"bill-go-fiber/internal/label"
 	"bill-go-fiber/internal/misc"
 	"fmt"
 	"log"
@@ -55,11 +56,13 @@ func Run() {
 	//cityRepository := city.NewCityRepository(mariadb)
 	//userRepository := user.NewUserRepository(mariadb)
 	billRepository := bill.NewBillRepository(sqlite)
+	labelRepository := label.NewLabelRepository(sqlite)
 
 	// Create all of our services.
 	//cityService := city.NewCityService(cityRepository)
 	//userService := user.NewUserService(userRepository)
 	billService := bill.NewBillService(billRepository)
+	labelService := label.NewLabelService(labelRepository)
 
 	// Prepare our endpoints for the API.
 	misc.NewMiscHandler(app.Group("/api/v1"))
@@ -67,6 +70,7 @@ func Run() {
 	//city.NewCityHandler(app.Group("/api/v1/cities"), cityService)
 	//user.NewUserHandler(app.Group("/api/v1/users"), userService)
 	bill.NewBillHandler(app.Group("/api/v1/bills"), billService)
+	label.NewLabelHandler(app.Group("/api/v1/labels"), labelService)
 
 	// Prepare an endpoint for 'Not Found'.
 	app.All("*", func(c *fiber.Ctx) error {
