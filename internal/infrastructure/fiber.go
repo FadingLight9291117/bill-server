@@ -54,7 +54,7 @@ func Run() {
 	// Create repositories.
 	//cityRepository := city.NewCityRepository(mariadb)
 	//userRepository := user.NewUserRepository(mariadb)
-	billRepository := bill.NewDatabaseRepository(sqlite)
+	billRepository := bill.NewBillRepository(sqlite)
 
 	// Create all of our services.
 	//cityService := city.NewCityService(cityRepository)

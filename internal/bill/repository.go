@@ -9,7 +9,7 @@ type sqliteRepository struct {
 	db *gorm.DB
 }
 
-func NewDatabaseRepository(db *gorm.DB) BillRepository {
+func NewBillRepository(db *gorm.DB) BillRepository {
 	return &sqliteRepository{
 		db: db,
 	}
