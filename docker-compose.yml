@@ -20,19 +20,19 @@ services:
       - mariadb
     command: ./docker-mariadb-clean-arch
 
-  mariadb:
-    image: mariadb:10.6.3
-    restart: always
-    volumes:
-      - ./scripts/billMigrations.sql:/docker-entrypoint-initdb.d/1.sql
-    expose:
-      - 3306
-    ports:
-      - 3306:3306
-    environment:
-      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=true
-    networks:
-      - application
-
+#  mariadb:
+#    image: mariadb:10.6.3
+#    restart: always
+#    volumes:
+#      - ./scripts/billMigrations.sql:/docker-entrypoint-initdb.d/1.sql
+#    expose:
+#      - 3306
+#    ports:
+#      - 3306:3306
+#    environment:
+#      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=true
+#    networks:
+#      - application
+#
 networks:
   application:
