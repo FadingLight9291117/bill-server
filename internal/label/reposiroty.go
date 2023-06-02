@@ -25,21 +25,23 @@ func (s *sqliteRepository) GetLabels(ctx context.Context) ([]Label, error) {
 }
 
 func (s *sqliteRepository) GetLabelById(ctx context.Context, id int) (*Label, error) {
-	//TODO implement me
-	panic("implement me")
+	var label Label
+	res := s.First(&label, id)
+	if res.Error != nil {
+		return nil, res.Error
+	}
+
+	return &label, nil
 }
 
 func (s *sqliteRepository) CreateLabel(ctx context.Context, label *Label) error {
-	//TODO implement me
-	panic("implement me")
+	return s.Create(label).Error
 }
 
 func (s *sqliteRepository) UpdateLabel(ctx context.Context, label *Label) error {
-	//TODO implement me
-	panic("implement me")
+	return s.Save(label).Error
 }
 
 func (s *sqliteRepository) DeleteLabel(ctx context.Context, id int) error {
-	//TODO implement me
-	panic("implement me")
+	return s.Delete(&Label{}, id).Error
 }
