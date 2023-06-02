@@ -17,8 +17,8 @@ RUN go mod download
 COPY . .
 
 # Build our application.
-#RUN CGO_ENABLED=0 GOOS=linux go build -o docker-mariadb-clean-arch ./cmd/docker-mariadb-clean-arch/main.go
-RUN go build  -a -ldflags "-linkmode external -extldflags '-static' -s -w" -o docker-mariadb-clean-arch ./cmd/docker-mariadb-clean-arch/main.go
+RUN #CGO_ENABLED=0 GOOS=linux go build -o bill-server ./cmd/bill-server/main.go
+RUN go build  -a -ldflags "-linkmode external -extldflags '-static' -s -w" -o bill-server ./cmd/bill-server/main.go
 
 
 
@@ -29,8 +29,8 @@ FROM scratch AS prod
 WORKDIR /production
 
 # Copy our compiled executable from the last stage.
-COPY --from=api /compiler/docker-mariadb-clean-arch .
+COPY --from=api /compiler/bill-server .
 
 # Run application and expose port 8080.
 EXPOSE 8080
-CMD ["./docker-mariadb-clean-arch"]
+CMD ["./bill-server"]
