@@ -102,7 +102,10 @@ func (h *LabelHandler) deleteLabel(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.SendStatus(fiber.StatusNoContent)
+	return c.Status(fiber.StatusNoContent).JSON(&fiber.Map{
+		"status":  "success",
+		"message": "Label has been deleted successfully",
+	})
 }
 
 func (h *LabelHandler) updateLabel(c *fiber.Ctx) error {
