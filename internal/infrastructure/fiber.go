@@ -69,8 +69,8 @@ func Run() {
 	//auth.NewAuthHandler(app.Group("/api/v1/auth"))
 	//city.NewCityHandler(app.Group("/api/v1/cities"), cityService)
 	//user.NewUserHandler(app.Group("/api/v1/users"), userService)
-	bill.NewBillHandler(app.Group("/api/v1/bill"), billService)
-	label.NewLabelHandler(app.Group("/api/v1/label"), labelService)
+	bill.NewBillHandler(app.Group("/api/v1/bills"), billService)
+	label.NewLabelHandler(app.Group("/api/v1/labels"), labelService)
 
 	// Prepare an endpoint for 'Not Found'.
 	app.All("*", func(c *fiber.Ctx) error {
