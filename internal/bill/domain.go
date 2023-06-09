@@ -12,7 +12,6 @@ type Bill struct {
 	Date    string
 	Money   float64
 	Class   string
-	Label   string
 	Options string
 }
 
