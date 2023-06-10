@@ -14,7 +14,7 @@ func NewBillHandler(billRoute fiber.Router, bs BillService) {
 		billService: bs,
 	}
 
-	billRoute.Get("/", handler.getBills)
+	billRoute.Get("/:year?/:month?/:day?", handler.checkGetBillsParams, handler.getBills)
 	billRoute.Post("/", handler.createBill)
 	billRoute.Put("/", handler.updateBill)
 	billRoute.Delete("/", handler.deleteBill)
@@ -23,8 +23,10 @@ func NewBillHandler(billRoute fiber.Router, bs BillService) {
 func (h *BillHandler) getBills(c *fiber.Ctx) error {
 	customContext, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	// TODO()
-	bills, err := h.billService.GetBills(customContext, BDate{})
+
+	bDate := c.Locals("bDate").(BDate)
+
+	bills, err := h.billService.GetBills(customContext, bDate)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(&fiber.Map{
 			"status":  "fail",
