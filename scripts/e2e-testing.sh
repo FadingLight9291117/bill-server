@@ -38,6 +38,26 @@ echo
 echo "Testing GET route after DELETE '/api/v1/labels/:labelID'..."
 curl $API_URL/api/v1/labels/3; echo
 
+# Test '/api/v1/bills'
+echo
+echo "Using 'year' with value of 2023, 'month' with value of 5, and 'day' with value of 30 "
+echo "Testing GET route '/api/v1/bills'..."
+curl $API_URL/api/v1/bills; echo
+echo
+echo "Testing GET route '/api/v1/bills/:year'..."
+curl $API_URL/api/v1/bills/2023; echo
+echo
+echo "Testing GET route '/api/v1/bills/:year/:month'..."
+curl $API_URL/api/v1/bills/2023/5; echo
+echo
+echo "Testing GET route '/api/v1/bills/:year/:month/:day'..."
+curl $API_URL/api/v1/bills/2023/5/30; echo
+echo
+echo "Testing POST route '/api/v1/bills"
+curl -X POST -H 'Content-Type: application/json' -d '{"year": 2023,"month":6, "day": 10, "money": 200, "label": "shopping"}' $API_URL/api/v1/bills; echo
+
+
+
 ## Testing '/api/v1/auth/login'.
 #echo
 #echo "Testing POST route '/api/v1/auth/login'..."
