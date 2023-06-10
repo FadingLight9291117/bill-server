@@ -6,51 +6,63 @@ import (
 )
 
 type sqliteRepository struct {
-	db *gorm.DB
+	*gorm.DB
 }
 
 func NewBillRepository(db *gorm.DB) BillRepository {
 	return &sqliteRepository{
-		db: db,
+		db,
 	}
 }
 
-func (db *sqliteRepository) GetBills(ctx context.Context) (*[]Bill, error) {
-	//TODO implement me
-	panic("implement me")
+func (db *sqliteRepository) GetBills(ctx context.Context) ([]Bill, error) {
+	var bills []Bill
+	if err := db.Find(&bills).Error; err != nil {
+		return nil, err
+	}
+	return bills, nil
 }
 
-func (db *sqliteRepository) GetBillByDay(ctx context.Context, year int, month int, day int) (*[]Bill, error) {
-	//TODO implement me
-	panic("implement me")
+func (db *sqliteRepository) GetBillByDay(ctx context.Context, year int, month int, day int) ([]Bill, error) {
+	var bills []Bill
+	if err := db.Where("year =? AND month =? AND day =?", year, month, day).Find(&bills).Error; err != nil {
+		return nil, err
+	}
+	return bills, nil
 }
 
-func (db *sqliteRepository) GetBillByMonth(ctx context.Context, year int, month int) (*[]Bill, error) {
-	//TODO implement me
-	panic("implement me")
+func (db *sqliteRepository) GetBillByMonth(ctx context.Context, year int, month int) ([]Bill, error) {
+	var bills []Bill
+	if err := db.Where("year =? AND month =?", year, month).Find(&bills).Error; err != nil {
+		return nil, err
+	}
+	return bills, nil
 }
 
-func (db *sqliteRepository) GetBillByYear(ctx context.Context, year int) (*[]Bill, error) {
-	//TODO implement me
-	panic("implement me")
+func (db *sqliteRepository) GetBillByYear(ctx context.Context, year int) ([]Bill, error) {
+	var bills []Bill
+	if err := db.Where("year =?", year).Find(&bills).Error; err != nil {
+		return nil, err
+	}
+	return bills, nil
 }
 
 func (db *sqliteRepository) GetBillByID(ctx context.Context, id int) (*Bill, error) {
-	//TODO implement me
-	panic("implement me")
+	var bill Bill
+	if err := db.Where("id =?", id).Find(&bill).Error; err != nil {
+		return nil, err
+	}
+	return &bill, nil
 }
 
 func (db *sqliteRepository) CreateBill(ctx context.Context, bill *Bill) error {
-	//TODO implement me
-	panic("implement me")
+	return db.Create(bill).Error
 }
 
 func (db *sqliteRepository) UpdateBill(ctx context.Context, bill *Bill) error {
-	//TODO implement me
-	panic("implement me")
+	return db.Save(bill).Error
 }
 
 func (db *sqliteRepository) DeleteBill(ctx context.Context, id int) error {
-	//TODO implement me
-	panic("implement me")
+	return db.Where("id =?", id).Delete(&Bill{}).Error
 }
