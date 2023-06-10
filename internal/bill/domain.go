@@ -23,10 +23,10 @@ type BDate struct {
 }
 
 type BillRepository interface {
-	GetBills(ctx context.Context) (*[]Bill, error)
-	GetBillByDay(ctx context.Context, year int, month int, day int) (*[]Bill, error)
-	GetBillByMonth(ctx context.Context, year int, month int) (*[]Bill, error)
-	GetBillByYear(ctx context.Context, year int) (*[]Bill, error)
+	GetBills(ctx context.Context) ([]Bill, error)
+	GetBillByDay(ctx context.Context, year int, month int, day int) ([]Bill, error)
+	GetBillByMonth(ctx context.Context, year int, month int) ([]Bill, error)
+	GetBillByYear(ctx context.Context, year int) ([]Bill, error)
 	GetBillByID(ctx context.Context, id int) (*Bill, error)
 	CreateBill(ctx context.Context, bill *Bill) error
 	UpdateBill(ctx context.Context, bill *Bill) error
@@ -34,7 +34,7 @@ type BillRepository interface {
 }
 
 type BillService interface {
-	GetBills(ctx context.Context, date BDate) (*[]Bill, error)
+	GetBills(ctx context.Context, date BDate) ([]Bill, error)
 	GetBillByID(ctx context.Context, id int) (*Bill, error)
 	CreateBill(ctx context.Context, bill *Bill) error
 	UpdateBill(ctx context.Context, bill *Bill) error
