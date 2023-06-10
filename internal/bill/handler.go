@@ -3,6 +3,7 @@ package bill
 import (
 	"context"
 	"github.com/gofiber/fiber/v2"
+	"log"
 )
 
 type BillHandler struct {
@@ -14,7 +15,7 @@ func NewBillHandler(billRoute fiber.Router, bs BillService) {
 		billService: bs,
 	}
 
-	billRoute.Get("/:year?/:month?/:day?", handler.checkGetBillsParams, handler.getBills)
+	billRoute.Get("/:year?/:month?/:day?", handler.checkGetBillsParamsMiddleware, handler.getBills)
 	billRoute.Post("/", handler.createBill)
 	billRoute.Put("/", handler.updateBill)
 	billRoute.Delete("/", handler.deleteBill)
@@ -43,16 +44,28 @@ func (h *BillHandler) getBills(c *fiber.Ctx) error {
 func (h *BillHandler) createBill(c *fiber.Ctx) error {
 	customContext, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	// TODO(): create bill
-	err := h.billService.CreateBill(customContext, &Bill{})
+
+	bill := &Bill{}
+	if err := c.BodyParser(bill); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(&fiber.Map{
+			"status":  "fail",
+			"message": err.Error(),
+		})
+	}
+
+	log.Printf("%v\n", bill)
+
+	err := h.billService.CreateBill(customContext, bill)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(&fiber.Map{
 			"status":  "fail",
 			"message": err.Error(),
 		})
 	}
+
 	return c.Status(fiber.StatusOK).JSON(&fiber.Map{
-		"status": "success",
+		"status":  "success",
+		"message": "Bill has been created successfully!",
 	})
 }
 

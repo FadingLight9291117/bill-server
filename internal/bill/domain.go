@@ -43,9 +43,9 @@ func (b *Bill) Dto() BillDTO {
 
 // BDate 用于判断获取bill的时间范围
 type BDate struct {
-	Year  int `json:"year"`
-	Month int `json:"month"`
-	Day   int `json:"day"`
+	Year  int `validate:"min=0"`
+	Month int `validate:"min=0,max=12"`
+	Day   int `validate:"min=0,max=31"`
 }
 
 type BillRepository interface {
